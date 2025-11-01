@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Layout principal (activity_main.xml)
+  Esta pantalla actúa como el "menú principal" de la aplicación SOSPhone.
+  Permite acceder a las funcionalidades principales:
+   - Enviar correo (Gmail)
+   - Realizar llamada SOS
+   - Abrir URL configurada
+   - Abrir la aplicación de alarma del sistema
+   - Acceder a los ajustes de configuración
+
+  Diseño:
+   - Basado en ConstraintLayout para un posicionamiento flexible y centrado.
+   - Estructura en cuadrícula de 2x2 botones + uno central inferior (Ajustes).
+   - Cada ImageButton tiene su texto descriptivo debajo (TextView).
+   - Todos los botones tienen imágenes representativas en /res/drawable/.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LLamadaActivity">
+
+    <!-- Texto superior con título del menú principal -->
+    <TextView
+        android:id="@+id/txt_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menú principal"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp" />
+
+    <!-- ======================================================= -->
+    <!-- BOTÓN GMAIL -->
+    <!-- Envía un intent hacia el cliente de correo (preferentemente Gmail). -->
+    <ImageButton
+        android:id="@+id/btnGmail"
+        android:layout_width="106dp"
+        android:layout_height="108dp"
+        android:adjustViewBounds="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Gmail"
+        android:scaleType="fitCenter"
+        android:src="@drawable/gmail"
+        app:layout_constraintTop_toBottomOf="@id/txt_welcome"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="32dp" />
+
+    <!-- Etiqueta del botón Gmail -->
+    <TextView
+        android:layout_width="105dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Gmail"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/btnGmail"
+        app:layout_constraintStart_toStartOf="@id/btnGmail" />
+
+    <!-- ======================================================= -->
+    <!-- BOTÓN TELÉFONO -->
+    <!-- Accede a LLamadaActivity para realizar una llamada SOS. -->
+    <ImageButton
+        android:id="@+id/btnTelefono"
+        android:layout_width="106dp"
+        android:layout_height="108dp"
+        android:adjustViewBounds="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Teléfono"
+        android:scaleType="fitCenter"
+        android:src="@drawable/telefono"
+        app:layout_constraintTop_toTopOf="@id/btnGmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp" />
+
+    <!-- Etiqueta del botón Teléfono -->
+    <TextView
+        android:layout_width="105dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Teléfono"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/btnTelefono"
+        app:layout_constraintStart_toStartOf="@id/btnTelefono" />
+
+    <!-- ======================================================= -->
+    <!-- BOTÓN URL -->
+    <!-- Abre la URL almacenada en SharedPreferences mediante ACTION_VIEW. -->
+    <ImageButton
+        android:id="@+id/btnURL"
+        android:layout_width="106dp"
+        android:layout_height="108dp"
+        android:adjustViewBounds="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="URL"
+        android:scaleType="fitCenter"
+        android:src="@drawable/url"
+        app:layout_constraintTop_toBottomOf="@id/btnGmail"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="32dp" />
+
+    <!-- Etiqueta del botón URL -->
+    <TextView
+        android:layout_width="105dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="URL"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/btnURL"
+        app:layout_constraintStart_toStartOf="@id/btnURL" />
+
+    <!-- ======================================================= -->
+    <!-- BOTÓN ALARMA -->
+    <!-- Abre la aplicación de reloj/alarma del sistema. -->
+    <ImageButton
+        android:id="@+id/btnAlarma"
+        android:layout_width="106dp"
+        android:layout_height="108dp"
+        android:adjustViewBounds="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Alarma"
+        android:scaleType="fitCenter"
+        android:src="@drawable/alarma"
+        app:layout_constraintTop_toTopOf="@id/btnURL"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp" />
+
+    <!-- Etiqueta del botón Alarma -->
+    <TextView
+        android:layout_width="105dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Alarma"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/btnAlarma"
+        app:layout_constraintStart_toStartOf="@id/btnAlarma" />
+
+    <!-- ======================================================= -->
+    <!-- BOTÓN AJUSTES -->
+    <!-- Abre ConfActivity, donde se gestionan teléfono, URL y alarma. -->
+    <ImageButton
+        android:id="@+id/btnAjustes"
+        android:layout_width="106dp"
+        android:layout_height="108dp"
+        android:adjustViewBounds="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Ajustes"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ajustes"
+        app:layout_constraintTop_toBottomOf="@id/btnURL"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp" />
+
+    <!-- Etiqueta del botón Ajustes -->
+    <TextView
+        android:layout_width="105dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Ajustes"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/btnAjustes"
+        app:layout_constraintStart_toStartOf="@id/btnAjustes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

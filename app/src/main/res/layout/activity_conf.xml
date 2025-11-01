@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Layout de la pantalla de configuración (ConfActivity).
+  Estructura:
+  - Título centrado.
+  - Campo de teléfono (entrada numérica).
+  - Campo de URL (entrada de texto tipo URI).
+  - Campo "alarma" que se utiliza como lanzador de DatePicker+TimePicker (la lógica está en la Activity).
+  - Botón Aceptar y botón para volver al menú principal.
+  - Etiqueta con la versión en la esquina inferior derecha.
+
+  Nota:
+  - El campo de "alarma" actualmente tiene inputType="time". Si se quiere evitar que aparezca el teclado
+    y forzar exclusivamente el selector de fecha/hora, se puede cambiar a inputType="none" y añadir:
+      android:focusable="false"
+      android:focusableInTouchMode="false"
+      android:clickable="true"
+  - En btn_conf se usa "100px". Lo habitual en Android es usar "dp" para márgenes, pero se mantiene tal cual.
+-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +25,7 @@
     android:layout_height="match_parent"
     tools:context=".ConfActivity">
 
+    <!-- Título de la pantalla de configuración -->
     <TextView
         android:id="@+id/txt_conf"
         android:layout_width="wrap_content"
@@ -19,19 +38,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2" />
 
+    <!-- Campo de teléfono (se valida/formatea en la Activity con libphonenumber) -->
     <EditText
         android:id="@+id/edit_phone"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:ems="10"
         android:hint="@string/txt_phone"
         android:inputType="phone"
         android:textSize="20sp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_conf" />
 
+    <!-- Campo de URL (validación en la Activity con Patterns.WEB_URL) -->
+    <EditText
+        android:id="@+id/edit_url"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Introduce la URL"
+        android:inputType="textUri"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/edit_phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!--
+      Campo "alarma":
+      - Se utiliza como disparador del DatePicker + TimePicker desde la Activity (onClickListener).
+      - Actualmente inputType="time": permitirá teclado en algunos dispositivos.
+      - Opcional (no aplicado): si se quiere evitar teclado, usar inputType="none" y setear focusable/clickable desde XML.
+    -->
+    <EditText
+        android:id="@+id/edit_alarma"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="Configurar alarma (HH:MM)"
+        android:inputType="time"
+        android:textSize="20sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_url" />
+
+    <!-- Botón para guardar configuración (mantener en SharedPreferences) -->
     <Button
         android:id="@+id/btn_conf"
         android:layout_width="wrap_content"
@@ -40,8 +97,20 @@
         android:text="@string/txt_boton_aceptar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_alarma" />
 
+    <!-- Botón para ir al menú principal -->
+    <Button
+        android:id="@+id/btn_ir_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ir al Menú Principal"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_conf"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Texto con versión de la app (parte inferior derecha) -->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"

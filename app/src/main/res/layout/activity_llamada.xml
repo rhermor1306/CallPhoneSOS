@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Layout de la pantalla de llamada SOS (LLamadaActivity).
+  Estructura general:
+  - Un botón central grande (“SOS”) que inicia la llamada al número configurado.
+  - Un ImageView (icono de teléfono con "+") para cambiar el número guardado.
+  - Un TextView que muestra el número SOS actual.
+
+  Notas:
+  - La Activity asocia estos componentes a través de ViewBinding (ActivityLlamadaBinding).
+  - El botón central lanza la llamada directa (ACTION_CALL) si se tienen permisos.
+  - El icono de teléfono abre la pantalla de configuración (ConfActivity) para modificar el número.
+  - El TextView muestra el número cargado desde SharedPreferences.
+
+  Diseño:
+  - ConstraintLayout: garantiza el centrado del botón y la posición anclada del resto de elementos.
+  - Sin ScrollView: la interfaz es sencilla y ocupa una sola vista fija.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LLamadaActivity">
+
+    <!--
+      Botón principal de acción SOS.
+      - Inicia la llamada telefónica al número configurado (ver método call() en LLamadaActivity).
+      - Tamaño grande (textSize=50sp) para facilitar la interacción táctil.
+      - Centrado horizontalmente y con margen superior de 236dp.
+    -->
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="236dp"
+        android:text="@string/txt_SOS"
+        android:textSize="50sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--
+      Icono para cambiar el número de teléfono SOS.
+      - Dispara un intent hacia ConfActivity para permitir editar el número guardado.
+      - La imagen se encuentra en /res/drawable/sharp_add_call_24.xml o .png.
+      - Se coloca anclado a la esquina inferior derecha del layout.
+    -->
+    <ImageView
+        android:id="@+id/iv_change_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/sharp_add_call_24" />
+
+    <!--
+      Texto que muestra el número SOS actualmente configurado.
+      - Se actualiza en tiempo de ejecución desde LLamadaActivity (setText(phoneSOS)).
+      - Alineado al borde superior e izquierdo.
+      - Usa un tamaño de fuente grande (30sp) para legibilidad.
+    -->
+    <TextView
+        android:id="@+id/txt_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="44dp"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

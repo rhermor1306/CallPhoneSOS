@@ -11,10 +11,14 @@
     <string name="txt_phone">Número de Teléfono:</string>
     <string name="txt_boton_aceptar">Aceptar</string>
     <string name="txt_version_app">V1.0 (App 2DAM)</string>
-
+    <string name="name_shared_url">url</string>
+    <string name="name_shared_alarm">alarma</string>
     <string name="msg_empty_phone">Debes introducir un teléfono válido</string>
     <string name="msg_not_valid_phone">Teléfono no válido</string>
     <string name="msg_new_phone">Debes poner un nuevo teléfono</string>
     <string name="txt_SOS">Llamar SOS</string>
     <string name="string_phone">phone</string>
+    <string name="chooser_email">Seleccionar aplicación de correo</string>
+    <string name="alarm_label">Alarma SOSPhone</string>
+
 </resources>
